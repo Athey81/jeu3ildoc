@@ -4,7 +4,7 @@ class Character
     public const ALIVE = 'alive';
     public const DEAD = 'dead';
     public const ATTAQUE_COST = 5;
-    public const AP_REGEN = 1;
+    public const AP_REGEN = 60;
     public const AP_MAX = 20;
     private $id;
     private $name;
@@ -30,7 +30,7 @@ class Character
 
     public function getNewAp()
     {
-        if (isset(lastaction)) {
+        /*if (isset($this->lastaction)) {*/
             $datetime1 = new DateTime('now');
             $datetime2 = new DateTime($this->lastaction);
             $interval = $datetime1->diff($datetime2);
@@ -39,9 +39,9 @@ class Character
                 $newAP = floor($seconde / self::AP_REGEN);
                 $this->ap = $this->ap + $newAP;
             }
-        } else {
-          // code...
-        }
+        /*} else {
+            $this->lastaction = new DateTime('now');
+        }*/
     }
 
     public function getState() {
@@ -92,10 +92,10 @@ class Character
     }
 
     public function getLastaction() {
-        return $this->password;
+        return $this->lastaction;
     }
 
-    public function setLastaction($password) {
-        $this->password = $password;
+    public function setLastaction($lastaction) {
+        $this->lastaction = $lastaction;
     }
 }
